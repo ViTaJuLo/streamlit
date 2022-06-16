@@ -19,7 +19,7 @@ pip install --upgrade streamlit
 # install a specific pyngrok version (=4.1.10.)
 # newer versions are not able to stream streamlit via google collab
 # to stick to this version therefore is essential!
-!pip install pyngrok==4.1.10.
+#!pip install pyngrok==4.1.10.
 
 # Commented out IPython magic to ensure Python compatibility.
 # %%writefile app.py
