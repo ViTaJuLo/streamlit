@@ -33,7 +33,7 @@ import numpy as np
 import pandas as pd
 import datetime
 #import sklearn
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 #import altair as alt
 # 
 # 
@@ -124,26 +124,3 @@ st.write(positive)
 st.slider("Select the datime!",value=(df["review_datetime_utc"][1],df["review_datetime_utc"][len(df)-1]))
  
 # defining bi & trigrams
-from sklearn.feature_extraction.text import CountVectorizer
-
-c_vec = CountVectorizer(ngram_range=(2,3)) # setting n-gram range
-  # vectorizing 
-ngrams = c_vec.fit_transform(df['cleaned_review'].apply(lambda x: np.str_(x)))
-  # frequency 
-count_values = ngrams.toarray().sum(axis=0)
-  # list of ngrams
-vocab = c_vec.vocabulary_
-negative_ngrams = pd.DataFrame(sorted([(count_values[i],k) for k,i in vocab.items()], reverse=True)
-            ).rename(columns={0: 'frequency', 1:'ngram'})
-  
-# produkt wordcloud based on n-gram frequency
-from wordcloud import WordCloud
-
-temp = negative_ngrams[["frequency", 'ngram']]
-data = temp.set_index('ngram').to_dict()['frequency']
-wc = WordCloud(width=800, height=400, max_words=200).generate_from_frequencies(data)
-plt.figure(figsize=(100,100), facecolor='none')
-plt.imshow(wc, interpolation="bilinear")
-plt.axis("off")
-plt.show()    
-st.pyplot()           
