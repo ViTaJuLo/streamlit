@@ -12,7 +12,7 @@ import streamlit as st
 def main():
     
     #st.sidebar.markdown("# Home 🛖")
-    st.image("/Users/vivian/Desktop/edeka.jpeg", use_column_width=False, width= 100)
+    #st.image("/Users/vivian/Desktop/edeka.jpeg", use_column_width=False, width= 100)
     st.title("Customer Satisfaction Dashboard")
     st.subheader("Wie schneidet Edeka Kohler im Vergleich zu anderen Lebensmittelketten ab?" )
     st.caption ("basierend auf Google Reviews")
@@ -66,7 +66,7 @@ def set_background(png_file):
     ''' % bin_str
     st.markdown(page_bg_img, unsafe_allow_html=True)
 # 
-set_background('/Users/vivian/Desktop/22.jpg')
+#set_background('/Users/vivian/Desktop/22.jpg')
 # 
 st.markdown(f'<h1 style="color:#808080;font-size:24px;">{"_______________________________________________________________________________________________________"}</h1>', unsafe_allow_html=True)
 st.subheader("Wozu dient das Dashboard?")
@@ -128,7 +128,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 
 c_vec = CountVectorizer(ngram_range=(2,3)) # setting n-gram range
   # vectorizing 
-ngrams = c_vec.fit_transform(negative['cleaned_review'].apply(lambda x: np.str_(x)))
+ngrams = c_vec.fit_transform(df['cleaned_review'].apply(lambda x: np.str_(x)))
   # frequency 
 count_values = ngrams.toarray().sum(axis=0)
   # list of ngrams
