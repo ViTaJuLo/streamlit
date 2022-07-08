@@ -29,7 +29,7 @@ if __name__ == '__main__':
 #page_names_to_funcs[selected_page]()
 import streamlit as st
 import numpy as np
-import plotly.express as px
+#import plotly.express as px
 import pandas as pd
 import datetime
 import sklearn
