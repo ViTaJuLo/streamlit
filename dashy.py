@@ -121,6 +121,6 @@ st.write(positive)
 #### 
 #df['review_datetime_utc'] = pd.to_datetime(df['review_datetime_utc'])
 #df['review_datetime_utc']=df['review_datetime_utc'].dt.date
-st.slider("Select the datime!",value=filtered_df["review_datetime_utc"][1])
+st.slider("Select the datime!",value=filtered_df.query("review_datetime_utc == '2022-02-01'")
 #st.slider("Select the datime!",value=(filtered_df["review_datetime_utc"][1],df["review_datetime_utc"][len(df)-1]))
 # defining bi & trigrams
