@@ -150,16 +150,7 @@ fig = px.bar(positive_ngrams_top, x="frequency" , y="ngram", title='Top 10 - Pos
 fig = fig.update_layout(xaxis_showgrid=False, yaxis_showgrid=False)
 fig = fig.update_traces(marker_color='blue')
 st.plotly_chart(fig, use_container_width=True)
-
-st.set_option('deprecation.showPyplotGlobalUse', False)
-temp = positive_ngrams[["frequency", 'ngram']]
-data = temp.set_index('ngram').to_dict()['frequency']
-wc = WordCloud(width=800, height=400, max_words=200).generate_from_frequencies(data)
-fig = plt.figure(figsize=(100,100), facecolor='none')
-fig = plt.imshow(wc, interpolation="bilinear")
-fig = plt.axis("off")
-fig = plt.show()    
-st.pyplot(fig)       
+   
 
 st.markdown(f'<h1 style="color:#808080;font-size:24px;">{"_______________________________________________________________________________________________________"}</h1>', unsafe_allow_html=True)
 
