@@ -8,7 +8,6 @@ Created on Sat Jul  9 18:25:39 2022
 
 import streamlit as st
 
-pip install plotly
 # LOGO
 st.image("https://raw.githubusercontent.com/ViTaJuLo/streamlit/main/edeka.jpeg", use_column_width=False, width= 100)
 
