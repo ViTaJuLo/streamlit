@@ -87,7 +87,7 @@ st.markdown(body, unsafe_allow_html=False)
 tickers = df['new_place_id'].unique()
 dropdown = st.multiselect('Welche Standorte möchten Sie vergleichen?', tickers, default=["Edeka Kohler Kehl  - Am Läger"])
 filtered_df = df[df["new_place_id"].isin(dropdown)]
-st.slider("Select the datime!",value=(filtered_df["review_datetime_utc"][1], filtered_df["review_datetime_utc"][len(filtered_df)-1]))
+st.slider("Select the datime!",value=(df["review_datetime_utc"][1], df["review_datetime_utc"][len(df)-1]))
 st.write(filtered_df)
 
 
