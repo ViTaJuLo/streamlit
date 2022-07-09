@@ -187,5 +187,5 @@ st.write(negative_ngrams)
 negative_ngrams_top = negative_ngrams[:10]
 fig = px.bar(negative_ngrams_top, x="frequency" , y="ngram", title='Top 10 - Negative N-grams')
 fig = fig.update_layout(xaxis_showgrid=False, yaxis_showgrid=False)
-fig = fig.update_traces(marker_color='blue')
+fig = fig.update_traces(marker_color='orange')
 st.plotly_chart(fig, use_container_width=True)
