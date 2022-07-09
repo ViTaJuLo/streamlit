@@ -82,12 +82,14 @@ st.subheader("Der Vergleich: Edeka vs. Andere")
 body = "Die unten abgebildete Matrix erlaubt es verschiedene Standorte mit Hinblick auf diverse Key Metriken zu vergleichen"
 st.markdown(body, unsafe_allow_html=False)
 
+start = df["review_datetime_utc"][0]
+end = df["review_datetime_utc"][len(df)-1]
 
 # CREATE DATA FILTERS 
 tickers = df['new_place_id'].unique()
 dropdown = st.multiselect('Welche Standorte möchten Sie vergleichen?', tickers, default=["Edeka Kohler Kehl  - Am Läger"])
 filtered_df = df[df["new_place_id"].isin(dropdown)]
-st.slider("Select the datime!",value=(df["review_datetime_utc"][0], df["review_datetime_utc"][len(df)-1]))
+st.slider("Select the datime!",value=(start, end))
 st.write(filtered_df)
 
 
