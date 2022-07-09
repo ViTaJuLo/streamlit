@@ -110,7 +110,7 @@ st.subheader("Entwicklung der Ratings über Zeit")
 body = "Diese Grafik visualisiert das durchschnittliche Rating per Standort über Zeit"
 st.markdown(body, unsafe_allow_html=False)
 group = filtered_df.groupby(['new_place_id', 'Review_year'], as_index=False)['review_rating'].mean()
-fig = px.line(group, x=group['Review_year'], y=group['review_rating'], width=1000, height=400, color=group['new_place_id'], title='Entwicklung des durschnittlichen Ratings pro Jahr pro GStandort')
+fig = px.line(group, x=group['Review_year'], y=group['review_rating'], width=1000, height=400, color=group['new_place_id'], title='Entwicklung des durschnittlichen Ratings pro Jahr pro Standort')
 #fig.show()
 fig = fig.update_layout(xaxis_showgrid=False, yaxis_showgrid=False)
 st.plotly_chart(fig, use_container_width=True)
@@ -148,7 +148,7 @@ from wordcloud import WordCloud
 positive_ngrams_top = positive_ngrams[:10]
 fig = px.bar(positive_ngrams_top, x="frequency" , y="ngram", title='Top 10 - Positive N-grams')
 fig = fig.update_layout(xaxis_showgrid=False, yaxis_showgrid=False)
-fig = fig.update_traces(marker_color='blue')
+fig = fig.update_traces(marker_color='green')
 st.plotly_chart(fig, use_container_width=True)
    
 
