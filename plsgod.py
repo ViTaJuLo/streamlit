@@ -89,13 +89,13 @@ filtered_df = df[df["new_place_id"].isin(dropdown)]
 st.subheader("Key Metriken" )
 #start = df["review_datetime_utc"][0]
 #end = df["review_datetime_utc"][len(df)-1]
-avg_rating = nlp_df.groupby(['new_place_id'], as_index=False)['review_rating'].mean()
+avg_rating = filtered_df.groupby(['new_place_id'], as_index=False)['review_rating'].mean()
 p1 = avg_rating.pivot_table('review_rating', index='Name')
 
-review_count =  nlp_df.groupby(['new_place_id'], as_index=False)['review_rating'].count()
+review_count =  filtered_df.groupby(['new_place_id'], as_index=False)['review_rating'].count()
 p2 = review_count.pivot_table('review_rating', index='Name')
 
-avg_sentiment = nlp_df.groupby(['new_place_id'], as_index=False)['polarity'].mean()
+avg_sentiment = filtered_df.groupby(['new_place_id'], as_index=False)['polarity'].mean()
 p3 = avg_sentiment.pivot_table('polarity', index='Name')
 
 frames = [avg_rating, review_count, avg_sentiment]
