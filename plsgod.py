@@ -104,6 +104,8 @@ st.plotly_chart(fig, use_container_width=True)
 ### CATEGORIES ####
 st.subheader("Wie wurden die Kategorien Preis-Leistungsverhältnis, Service, Produkte & Innendesign von Kunden bewertet?")
 body = "Diese Matrix visualisiert pro Kategorie den durchschnittlichen Sentiment-Score für die ausgewählten Geschäfte und den ausgewählten Zeitraumen. Der Score bewegt sich zwischen -1 und 1, wobei -1 sehr negativ ist und +1 sehr positiv."
+st.markdown(body, unsafe_allow_html=False)
+
 st.set_option('deprecation.showPyplotGlobalUse', False)
 preis_df = filtered_df.query("preis == 1")
 preis_df['preis'] = np.where(preis_df['preis']== 1, "preis", 0)
@@ -132,7 +134,6 @@ pivot_produkt = produkt_group.pivot_table('polarity', index='new_place_id', colu
 design_df = filtered_df.query("innendesign == 1")
 design_df['innendesign'] = np.where(design_df['innendesign']== 1, "design", 0)
 design_group = design_df.groupby(['new_place_id', "innendesign"], as_index=False)['polarity'].mean()
-design_group
 pivot_design = design_group.pivot_table('polarity', index='new_place_id', columns=('innendesign'))
 #sns.set(rc={'figure.figsize':(11.7,8.27)})
 #swarm_plot = sns.heatmap(pivot_design, cmap="vlag_r", annot=True, cbar=False, annot_kws = {'fontsize': 10 }, linewidth = 1)
