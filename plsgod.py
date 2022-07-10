@@ -83,7 +83,7 @@ tickers = df['new_place_id'].unique()
 dropdown = st.sidebar.multiselect('Welche Standorte möchten Sie vergleichen?', tickers, default=["Edeka Kohler Kehl  - Am Läger"])
 filtered_df = df[df["new_place_id"].isin(dropdown)]
 
-select_year_range = sorted(filtered_df["review_datetime_utc"].unique()
+select_year_range = sorted(filtered_df["review_datetime_utc"].unique())
 vmax = filtered_df["review_datetime_utc"].max()
 vmin = filtered_df["review_datetime_utc"].max()
                           
