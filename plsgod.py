@@ -109,6 +109,7 @@ import functools as ft
 df_final = ft.reduce(lambda left, right: pd.merge(left, right, on='new_place_id'), frames)
 df_final = df_final.rename(columns={'new_place_id': 'Standort', 'review_rating_x': 'avg. rating', 'polarity': 'avg. sentiment',  'review_rating_y': 'count reviews'})
 df_final["negative feedback %"] = polarity_per
+df_final = df_final.reindex(columns=['Standort','avg. rating', 'avg. sentiment','negative feedback %','count reviews'])
 st.table(df_final)
 ########
 
