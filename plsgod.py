@@ -88,7 +88,7 @@ vmax = filtered_df["review_datetime_utc"].max()
 vmin = filtered_df["review_datetime_utc"].max()
                           
 #select_data = st.sidebar.select_slider("Select the datime!",options=select_year_range, value=(vmax, vmin))
-select_data = st.sidebar.select_slider("Select the datime!", value=(vmax, vmin))
+select_data = st.sidebar.slider("Select the datime!", value=(vmax, vmin))
 
 st.subheader("Key Metriken" )
 #start = df["review_datetime_utc"][0]
