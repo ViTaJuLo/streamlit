@@ -151,7 +151,7 @@ st.markdown('##')
 st.subheader("Entwicklung der durchschnittlichen Ratings")
 body = "Diese Grafik visualisiert die Entwicklung des durchschnittlichen Sterne-Ratings für den ausgewählten Zeitraum."
 st.markdown(body, unsafe_allow_html=False)
-group = filtered_df.groupby(['new_place_id', 'Review_year'], as_index=False)['review_rating'].mean()
+group = dff.groupby(['new_place_id', 'Review_year'], as_index=False)['review_rating'].mean()
 fig = px.line(group, x=group['Review_year'], y=group['review_rating'], width=1000, height=400, color=group['new_place_id'])
 #fig.show()
 fig = fig.update_layout(xaxis_showgrid=False, yaxis_showgrid=False)
@@ -161,7 +161,7 @@ st.markdown('##')
 st.subheader("Entwicklung der durchschnittlichen Sentiment-Ratings")
 body = "Diese Grafik visualisiert die Entwicklung des durchschnittlichen Sentiments für den ausgewählten Zeitraum."
 st.markdown(body, unsafe_allow_html=False)
-group = filtered_df.groupby(['new_place_id', 'Review_year'], as_index=False)['polarity'].mean()
+group = dff.groupby(['new_place_id', 'Review_year'], as_index=False)['polarity'].mean()
 fig = px.line(group, x=group['Review_year'], y=group['polarity'], width=1000, height=400, color=group['new_place_id'])
 #fig.show()
 fig = fig.update_layout(xaxis_showgrid=False, yaxis_showgrid=False)
@@ -176,7 +176,7 @@ body = "Diese Matrix visualisiert pro Kategorie den durchschnittlichen Sentiment
 st.markdown(body, unsafe_allow_html=False)
 
 st.set_option('deprecation.showPyplotGlobalUse', False)
-preis_df = filtered_df.query("preis == 1")
+preis_df = dff.query("preis == 1")
 preis_df['preis'] = np.where(preis_df['preis']== 1, "preis", 0)
 preis_group = preis_df.groupby(['new_place_id', "preis"], as_index=False)['polarity'].mean()
 pivot_preis = preis_group.pivot_table('polarity', index='new_place_id', columns=('preis'))
@@ -184,7 +184,7 @@ pivot_preis = preis_group.pivot_table('polarity', index='new_place_id', columns=
 #swarm_plot = sns.heatmap(pivot_preis, cmap="vlag_r", annot=True, cbar=False, annot_kws = {'fontsize': 10 }, linewidth = 1)
 
 
-service_df = filtered_df.query("service == 1")
+service_df = dff.query("service == 1")
 service_df['service'] = np.where(service_df['service']== 1, "service", 0)
 service_group = service_df.groupby(['new_place_id', "service"], as_index=False)['polarity'].mean()
 pivot_service = service_group.pivot_table('polarity', index='new_place_id', columns=('service'))
@@ -192,7 +192,7 @@ pivot_service = service_group.pivot_table('polarity', index='new_place_id', colu
 #swarm_plot = sns.heatmap(pivot_service, cmap="vlag_r", annot=True, cbar=False, annot_kws = {'fontsize': 10 }, linewidth = 1)
 
 
-produkt_df = filtered_df.query("produkte == 1")
+produkt_df = dff.query("produkte == 1")
 produkt_df['produkte'] = np.where(produkt_df['produkte']== 1, "produkte", 0)
 produkt_group = produkt_df.groupby(['new_place_id', "produkte"], as_index=False)['polarity'].mean()
 pivot_produkt = produkt_group.pivot_table('polarity', index='new_place_id', columns=('produkte'))
@@ -200,7 +200,7 @@ pivot_produkt = produkt_group.pivot_table('polarity', index='new_place_id', colu
 #swarm_plot = sns.heatmap(pivot_produkt, cmap="vlag_r", annot=True, cbar=False, annot_kws = {'fontsize': 10 }, linewidth = 1)
 
 
-design_df = filtered_df.query("innendesign == 1")
+design_df = dff.query("innendesign == 1")
 design_df['innendesign'] = np.where(design_df['innendesign']== 1, "design", 0)
 design_group = design_df.groupby(['new_place_id', "innendesign"], as_index=False)['polarity'].mean()
 pivot_design = design_group.pivot_table('polarity', index='new_place_id', columns=('innendesign'))
