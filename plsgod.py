@@ -143,9 +143,9 @@ result = pd.concat(frames, axis=1)
 #swarm_plot = sns.heatmap(result, cmap="vlag_r", annot=True, cbar=False, annot_kws = {'fontsize': 10 }, linewidth = 1)
 #plt.show()
 #st.pyplot(fig, use_container_width=True)
-fig.show()
 fig = px.imshow(result, text_auto=True, aspect="auto", color_continuous_scale='purples')
-fig = fig.update(layout_showlegend=False)
+fig = fig.update_traces(marker_showscale=False) 
+fig.show()
 st.plotly_chart(fig, use_container_width=True)
 
 
