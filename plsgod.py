@@ -107,7 +107,7 @@ polarity_per = list((p_sum['ratio_polarity'] / p_len['ratio_polarity']) * 100)
 
 import functools as ft
 df_final = ft.reduce(lambda left, right: pd.merge(left, right, on='new_place_id'), frames)
-df_final = df_final.rename(columns={'new_place_id': 'Standort', 'review_rating_x': 'avg. rating', 'review_rating_y': 'count reviews', 'polarity': 'avg. sentiment'})
+df_final = df_final.rename(columns={'new_place_id': 'Standort', 'review_rating_x': 'avg. rating', 'polarity': 'avg. sentiment',  'review_rating_y': 'count reviews'})
 df_final["negative feedback %"] = polarity_per
 st.table(df_final)
 ########
