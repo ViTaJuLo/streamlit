@@ -59,6 +59,7 @@ import sklearn
 import matplotlib.pyplot as plt
 import plotly.express as px
 import seaborn as sns
+import plotly.graph_objects as go
 
 
 
@@ -88,19 +89,41 @@ filtered_df = df[df["new_place_id"].isin(dropdown)]
 st.subheader("Key Metriken" )
 #start = df["review_datetime_utc"][0]
 #end = df["review_datetime_utc"][len(df)-1]
+avg_rating = nlp_df.groupby(['new_place_id'], as_index=False)['review_rating'].mean()
+p1 = avg_rating.pivot_table('review_rating', index='Name')
 
+review_count =  nlp_df.groupby(['new_place_id'], as_index=False)['review_rating'].count()
+p2 = review_count.pivot_table('review_rating', index='Name')
 
+avg_sentiment = nlp_df.groupby(['new_place_id'], as_index=False)['polarity'].mean()
+p3 = avg_sentiment.pivot_table('polarity', index='Name')
+
+frames = [avg_rating, review_count, avg_sentiment]
+result = pd.concat(frames, axis=1)
+
+import functools as ft
+df_final = ft.reduce(lambda left, right: pd.merge(left, right, on='Name'), frames)
+df_final = df_final.rename(columns={'review_rating_x': 'avg. rating', 'review_rating_y': 'count reviews', 'polarity': 'avg. sentiment'})
+
+fig = go.Figure(data=[go.Table(
+    header=dict(values=list(df_final.columns),
+                fill_color='purple',
+                align='left'),
+    cells=dict(values=[df_final.columns],
+               fill_color='black',
+               align='left'))
+])
 
 ########
 
-group = filtered_df.groupby(['new_place_id'], as_index=False).agg({'polarity_reviews': ['mean'], 'review_rating': ['mean','count']})
-pivot = group.pivot_table(columns="new_place_id")
-fig = px.imshow(pivot, text_auto=True, aspect="auto", color_continuous_scale='blackbody')
-fig.show()
-st.plotly_chart(fig, use_container_width=True)
+#group = filtered_df.groupby(['new_place_id'], as_index=False).agg({'polarity_reviews': ['mean'], 'review_rating': ['mean','count']})
+#pivot = group.pivot_table(columns="new_place_id")
+#fig = px.imshow(pivot, text_auto=True, aspect="auto", color_continuous_scale='blackbody')
+#fig.show()
+#st.plotly_chart(fig, use_container_width=True)
 
-body = "Die unten abgebildete Matrix erlaubt es verschiedene Standorte mit Hinblick auf diverse Key Metriken zu vergleichen."
-st.markdown(body, unsafe_allow_html=False)
+#body = "Die unten abgebildete Matrix erlaubt es verschiedene Standorte mit Hinblick auf diverse Key Metriken zu vergleichen."
+#st.markdown(body, unsafe_allow_html=False)
 
 
 
