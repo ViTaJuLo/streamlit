@@ -106,7 +106,7 @@ st.markdown(body, unsafe_allow_html=False)
 
 #####  SECOND VISUALS: RATINGS OVER TIME ####
 
-
+st.markdown('##')
 st.subheader("Entwicklung der durchschnittlichen Ratings")
 body = "Diese Grafik visualisiert die Entwicklung des durchschnittlichen Sterne-Ratings."
 st.markdown(body, unsafe_allow_html=False)
@@ -116,7 +116,7 @@ fig = px.line(group, x=group['Review_year'], y=group['review_rating'], width=100
 fig = fig.update_layout(xaxis_showgrid=False, yaxis_showgrid=False)
 st.plotly_chart(fig, use_container_width=True)
 
-
+st.markdown('##')
 st.subheader("Entwicklung der durchschnittlichen Sentiment-Ratings")
 body = "Diese Grafik visualisiert die Entwicklung des durchschnittlichen Sentiment-Ratings."
 st.markdown(body, unsafe_allow_html=False)
@@ -193,7 +193,7 @@ st.markdown(f'<h1 style="color:#808080;font-size:24px;">{"______________________
 
 # POSITIVE N-GRAMS 
 st.subheader("Positives Feedback per Standort")
-body = "Diese Grafik zeigt das positive Feedback anhand derjenigen Reviews, die ein Sentiment größer oder gleich 0 aufweisen"
+body = "Diese Grafik zeigt das positive Feedback anhand derjenigen Reviews, die ein Sentiment größer oder gleich 0 aufweisen."
 st.markdown(body, unsafe_allow_html=False)
 positive = df.query("polarity >= 0")
 tickers2 = positive['new_place_id'].unique()
@@ -233,8 +233,11 @@ st.markdown(f'<h1 style="color:#808080;font-size:24px;">{"______________________
 
 # Negative Ngrams
 st.subheader("Negatives Feedback per Standort")
-body = "Diese Grafik zeigt das negative Feedback anhand derjenigen Reviews an, die ein Sentiment zwischen -1 und 0 aufweisen. Anmerkung: Leider sagt der Algorithmus nicht alle negativen Feedbacks richtig voraus. Deswegen kann es hier zu Unstimmigkeiten kommen."
+body = "Diese Grafik zeigt das negative Feedback anhand derjenigen Reviews an, die ein Sentiment zwischen -1 und 0 aufweisen."
+body2 = "Anmerkung: Leider sagt der Algorithmus nicht alle negativen Feedbacks richtig voraus. Deswegen kann es hier zu Unstimmigkeiten kommen."
+st.markdown('##')
 st.markdown(body, unsafe_allow_html=False)
+st.markdown(body2, unsafe_allow_html=False)
 negative = df.query("polarity < 0")
 tickers3 = negative['new_place_id'].unique()
 dropdown3 = st.multiselect('Welchen Standort möchten Sie auswählen?', tickers3, default=["Edeka Kohler Kehl  - Am Läger"])
