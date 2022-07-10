@@ -85,6 +85,7 @@ st.markdown(body, unsafe_allow_html=False)
 #start = df["review_datetime_utc"][0]
 #end = df["review_datetime_utc"][len(df)-1]
 
+
 # CREATE DATA FILTERS 
 tickers = df['new_place_id'].unique()
 dropdown = st.multiselect('Welche Standorte möchten Sie vergleichen?', tickers, default=["Edeka Kohler Kehl  - Am Läger"])
@@ -100,8 +101,16 @@ fig.show()
 st.plotly_chart(fig, use_container_width=True)
 
 
+### CATEGORIES ####
 
-
+preis_df = filtered_df.query("preis == 1")
+preis_df['preis'] = np.where(preis_df['preis']== 1, "preis", 0)
+preis_group = preis_df.groupby(['new_place_id', "preis"], as_index=False)['polarity'].mean()
+pivot_preis = preis_group.pivot_table('polarity', index='new_place_id', columns=('preis'))
+sns.set(rc={'figure.figsize':(11.7,8.27)})
+swarm_plot = sns.heatmap(pivot_preis, cmap="vlag_r", annot=True, cbar=False, annot_kws = {'fontsize': 10 }, linewidth = 1)
+plt.show()
+st.plotly_chart(swarm_plot, use_container_width=True)
 
 
 
