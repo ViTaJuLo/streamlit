@@ -274,8 +274,8 @@ negative = df.query("polarity < 0")
 select_office = sorted(negative['new_place_id'].unique())
 select_office_dropdown = st.sidebar.multiselect('Select one or multiple office(s) to display data:', select_office, default=["Edeka Kohler Kehl  - Am Läger"])
 select_year_range = reversed(sorted(negative['Review_year'].unique()))
-yearmax = negative['Review_year'].max()
-yearmin = negative['Review_year'].min()
+yearmax = negative['review_datetime_utc'].max()
+yearmin = negative['review_datetime_utc'].min()
 select_year_slider = st.select_slider('Use slider to display year range:', options=select_year_range, value=(yearmax, yearmin))
 #startyear, endyear = list(select_year_slider)[0], list(select_year_slider)[1]
     
