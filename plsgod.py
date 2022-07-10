@@ -295,7 +295,7 @@ yearmin = negative['review_datetime_utc'].min()
 select_year_slider = st.select_slider('Bitte wählen Sie einen Zeitraum aus.', options=select_year_range, value=(yearmax, yearmin))
 startyear, endyear = list(select_year_slider)[0], list(select_year_slider)[1]
     
-selected_office_year = negative[(negative.new_place_id.isin(select_office_dropdown)) & ((negative.Review_year <= startyear) & (negative.Review_year >= endyear))]
+selected_office_year = negative[(negative.new_place_id.isin(select_office_dropdown)) & ((negative.review_datetime_utc <= startyear) & (negative.review_datetime_utc >= endyear))]
 
 #st.map(selected_office_year)
 #st.dataframe(selected_office_year.reset_index(drop=True))
