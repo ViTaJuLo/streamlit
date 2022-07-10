@@ -100,9 +100,15 @@ p3 = avg_sentiment.pivot_table('polarity', index='new_place_id')
 frames = [avg_rating, review_count, avg_sentiment]
 result = pd.concat(frames, axis=1)
 
+filtered_df['ratio_polarity'] = np.where(filtered_df['polarity'] >= 0, 0, 1) # encoded inverted to compute easier
+p_len = filtered_df.groupby(['new_place_id'], as_index=False)['ratio_polarity'].count()
+p_sum = nlp_df.groupby(['new_place_id'], as_index=False)['ratio_polarity'].sum()
+polarity_per = list((p_sum['ratio_polarity'] / p_len['ratio_polarity']) * 100)
+
 import functools as ft
 df_final = ft.reduce(lambda left, right: pd.merge(left, right, on='new_place_id'), frames)
 df_final = df_final.rename(columns={'new_place_id': 'Standort', 'review_rating_x': 'avg. rating', 'review_rating_y': 'count reviews', 'polarity': 'avg. sentiment'})
+df_final["negative feedback %"] = polarity_per
 st.table(df_final)
 ########
 
