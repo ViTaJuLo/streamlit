@@ -113,7 +113,7 @@ fig = go.Figure(data=[go.Table(
                fill_color='black',
                align='left'))
 ])
-
+st.plotly_chart(fig, use_container_width=True)
 ########
 
 #group = filtered_df.groupby(['new_place_id'], as_index=False).agg({'polarity_reviews': ['mean'], 'review_rating': ['mean','count']})
