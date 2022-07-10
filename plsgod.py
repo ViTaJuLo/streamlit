@@ -92,11 +92,11 @@ select_year_slider3 = st.select_slider('Bitte wählen Sie einen Zeitraum aus.', 
 
 startyear3, endyear3 = list(select_year_slider3)[0], list(select_year_slider3)[1]
     
-selected_office_year3 = df[(df.new_place_id.isin(select_office_dropdown3)) & ((df.review_datetime_utc <= startyear3) & (df.review_datetime_utc >= endyear3))]
+selected_office_year3 = df[(df.new_place_id.isin(dropdown)) & ((df.review_datetime_utc <= startyear3) & (df.review_datetime_utc >= endyear3))]
 #select_year_range = sorted(filtered_df["review_datetime_utc"].unique())
 #vmax = df["Review_year"].max()
 #vmin = df["Review_year"].max()
-                          
+dff = selected_office_year3[selected_office_year3["new_place_id"].isin(dropdown)]                       
 #select_data = st.sidebar.slider("Select the datime!", value=(vmax, vmin))
 #select_data = st.sidebar.slider("Select the datime!", value=(df[(df['review_datetime_utc'] == '2021-1-1')], df[(df['review_datetime_utc'] == '2022-6-1')]))
 #df[(df['date'] > '2000-6-1') & (df['date'] <= '2000-6-10')]
@@ -109,21 +109,21 @@ from dateutil.relativedelta import relativedelta # to add days or years
 st.subheader("Key Metriken" )
 #start = df["review_datetime_utc"][0]
 #end = df["review_datetime_utc"][len(df)-1]
-avg_rating = filtered_df.groupby(['new_place_id'], as_index=False)['review_rating'].mean()
+avg_rating = dff.groupby(['new_place_id'], as_index=False)['review_rating'].mean()
 p1 = avg_rating.pivot_table('review_rating', index='new_place_id')
 
-review_count =  filtered_df.groupby(['new_place_id'], as_index=False)['review_rating'].count()
+review_count =  dff.groupby(['new_place_id'], as_index=False)['review_rating'].count()
 p2 = review_count.pivot_table('review_rating', index='new_place_id')
 
-avg_sentiment = filtered_df.groupby(['new_place_id'], as_index=False)['polarity'].mean()
+avg_sentiment = dff.groupby(['new_place_id'], as_index=False)['polarity'].mean()
 p3 = avg_sentiment.pivot_table('polarity', index='new_place_id')
 
 frames = [avg_rating, review_count, avg_sentiment]
 result = pd.concat(frames, axis=1)
 
-filtered_df['ratio_polarity'] = np.where(filtered_df['polarity'] >= 0, 0, 1) # encoded inverted to compute easier
-p_len = filtered_df.groupby(['new_place_id'], as_index=False)['ratio_polarity'].count()
-p_sum = filtered_df.groupby(['new_place_id'], as_index=False)['ratio_polarity'].sum()
+dff['ratio_polarity'] = np.where(dff['polarity'] >= 0, 0, 1) # encoded inverted to compute easier
+p_len = dff.groupby(['new_place_id'], as_index=False)['ratio_polarity'].count()
+p_sum = dff.groupby(['new_place_id'], as_index=False)['ratio_polarity'].sum()
 polarity_per = list((p_sum['ratio_polarity'] / p_len['ratio_polarity']) * 100)
 
 import functools as ft
