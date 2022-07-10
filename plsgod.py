@@ -93,19 +93,6 @@ filtered_df = df[df["new_place_id"].isin(dropdown)]
 
 from dateutil.relativedelta import relativedelta # to add days or years
 
-year=
-        ## Range selector
-format = 'MMM DD, YYYY'  # format output
-start_date = dt.date(year=2021,month=1,day=1)-relativedelta(years=2)  #  I need some range in the past
-end_date = dt.datetime.now().date()-relativedelta(years=2)
-max_days = end_date-start_date
-        
-slider = st.slider('Select date', min_value=start_date, value=end_date ,max_value=end_date, format=format)
-        ## Sanity check
-st.table(pd.DataFrame([[start_date, slider, end_date]],columns=['start','selected','end'],index=['date']))
-
-
-
 
 
 
