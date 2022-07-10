@@ -110,7 +110,7 @@ pivot_preis = preis_group.pivot_table('polarity', index='new_place_id', columns=
 sns.set(rc={'figure.figsize':(11.7,8.27)})
 swarm_plot = sns.heatmap(pivot_preis, cmap="vlag_r", annot=True, cbar=False, annot_kws = {'fontsize': 10 }, linewidth = 1)
 plt.show()
-st.plotly_chart(swarm_plot, use_container_width=True)
+st.pyplot(swarm_plot, use_container_width=True)
 
 
 
