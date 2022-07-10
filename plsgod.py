@@ -144,7 +144,7 @@ result = pd.concat(frames, axis=1)
 #plt.show()
 #st.pyplot(fig, use_container_width=True)
 fig = px.imshow(result, text_auto=True, aspect="auto", color_continuous_scale='purples')
-fig = fig.update_traces(marker_showscale=False) 
+fig.update_layout(coloraxis_showscale=False)
 fig.show()
 st.plotly_chart(fig, use_container_width=True)
 
