@@ -88,20 +88,19 @@ filtered_df = df[df["new_place_id"].isin(dropdown)]
 #vmin = filtered_df["review_datetime_utc"].max()
                           
 #select_data = st.sidebar.select_slider("Select the datime!",options=select_year_range, value=(vmax, vmin))
-select_data = st.sidebar.slider("Select the datime!", value=(df[(df['review_datetime_utc'] == '2021-1-1')], df[(df['review_datetime_utc'] == '2022-6-1')]))
+#select_data = st.sidebar.slider("Select the datime!", value=(df[(df['review_datetime_utc'] == '2021-1-1')], df[(df['review_datetime_utc'] == '2022-6-1')]))
 #df[(df['date'] > '2000-6-1') & (df['date'] <= '2000-6-10')]
 
 from dateutil.relativedelta import relativedelta # to add days or years
 
-
+year=
         ## Range selector
-cols1,_ = st.beta_columns((1,2)) # To make it narrower
 format = 'MMM DD, YYYY'  # format output
 start_date = dt.date(year=2021,month=1,day=1)-relativedelta(years=2)  #  I need some range in the past
 end_date = dt.datetime.now().date()-relativedelta(years=2)
 max_days = end_date-start_date
         
-slider = cols1.slider('Select date', min_value=start_date, value=end_date ,max_value=end_date, format=format)
+slider = st.slider('Select date', min_value=start_date, value=end_date ,max_value=end_date, format=format)
         ## Sanity check
 st.table(pd.DataFrame([[start_date, slider, end_date]],columns=['start','selected','end'],index=['date']))
 
@@ -283,11 +282,37 @@ body2 = "Anmerkung: Leider sagt der Algorithmus nicht alle negativen Feedbacks r
 st.markdown('##')
 st.markdown(body, unsafe_allow_html=False)
 st.markdown(body2, unsafe_allow_html=False)
-negative = df.query("polarity < 0")
-tickers3 = negative['new_place_id'].unique()
-dropdown3 = st.multiselect('Welchen Standort möchten Sie auswählen?', tickers3, default=["Edeka Kohler Kehl  - Am Läger"])
 
-neg_df = negative[negative["new_place_id"].isin(dropdown3)]
+negative = df.query("polarity < 0")
+select_office = sorted(negative['new_place_id'].unique())
+select_office_dropdown = st.sidebar.multiselect('Select one or multiple office(s) to display data:', select_office, default=["Edeka Kohler Kehl  - Am Läger"])
+select_year_range = reversed(sorted(negative['Review_year'].unique()))
+yearmax = negative['Review_year'].max()
+yearmin = negative['Review_year'].min()
+select_year_slider = st.select_slider('Use slider to display year range:', options=select_year_range, value=(yearmax, yearmin))
+startyear, endyear = list(select_year_slider)[0], list(select_year_slider)[1]
+    
+selected_office_year = negative[(negative.new_place_id.isin(select_office_dropdown)) & ((negative.Review_year <= startyear) & (negative.Review_year >= endyear))]
+    
+st.map(selected_office_year)
+st.dataframe(selected_office_year.reset_index(drop=True))
+
+
+
+
+
+
+
+
+
+
+
+
+#negative = df.query("polarity < 0")
+#tickers3 = negative['new_place_id'].unique()
+#dropdown3 = st.multiselect('Welchen Standort möchten Sie auswählen?', tickers3, default=["Edeka Kohler Kehl  - Am Läger"])
+
+#neg_df = negative[negative["new_place_id"].isin(dropdown3)]
 from sklearn.feature_extraction.text import CountVectorizer
 
 
