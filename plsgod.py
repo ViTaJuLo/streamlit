@@ -109,7 +109,6 @@ preis_group = preis_df.groupby(['new_place_id', "preis"], as_index=False)['polar
 pivot_preis = preis_group.pivot_table('polarity', index='new_place_id', columns=('preis'))
 fig = sns.set(rc={'figure.figsize':(11.7,8.27)})
 swarm_plot = sns.heatmap(pivot_preis, cmap="vlag_r", annot=True, cbar=False, annot_kws = {'fontsize': 10 }, linewidth = 1)
-st.pyplot(fig, use_container_width=True)
 
 
 service_df = filtered_df.query("service == 1")
@@ -135,7 +134,6 @@ design_group
 pivot_design = design_group.pivot_table('polarity', index='new_place_id', columns=('innendesign'))
 sns.set(rc={'figure.figsize':(11.7,8.27)})
 swarm_plot = sns.heatmap(pivot_design, cmap="vlag_r", annot=True, cbar=False, annot_kws = {'fontsize': 10 }, linewidth = 1)
-plt.show()
 
 frames = [pivot_preis, pivot_service, pivot_produkt, pivot_design]
 
