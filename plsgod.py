@@ -107,24 +107,24 @@ preis_df = filtered_df.query("preis == 1")
 preis_df['preis'] = np.where(preis_df['preis']== 1, "preis", 0)
 preis_group = preis_df.groupby(['new_place_id', "preis"], as_index=False)['polarity'].mean()
 pivot_preis = preis_group.pivot_table('polarity', index='new_place_id', columns=('preis'))
-fig = sns.set(rc={'figure.figsize':(11.7,8.27)})
-swarm_plot = sns.heatmap(pivot_preis, cmap="vlag_r", annot=True, cbar=False, annot_kws = {'fontsize': 10 }, linewidth = 1)
+#fig = sns.set(rc={'figure.figsize':(11.7,8.27)})
+#swarm_plot = sns.heatmap(pivot_preis, cmap="vlag_r", annot=True, cbar=False, annot_kws = {'fontsize': 10 }, linewidth = 1)
 
 
 service_df = filtered_df.query("service == 1")
 service_df['service'] = np.where(service_df['service']== 1, "service", 0)
 service_group = service_df.groupby(['new_place_id', "service"], as_index=False)['polarity'].mean()
 pivot_service = service_group.pivot_table('polarity', index='new_place_id', columns=('service'))
-sns.set(rc={'figure.figsize':(11.7,8.27)})
-swarm_plot = sns.heatmap(pivot_service, cmap="vlag_r", annot=True, cbar=False, annot_kws = {'fontsize': 10 }, linewidth = 1)
+#sns.set(rc={'figure.figsize':(11.7,8.27)})
+#swarm_plot = sns.heatmap(pivot_service, cmap="vlag_r", annot=True, cbar=False, annot_kws = {'fontsize': 10 }, linewidth = 1)
 
 
 produkt_df = filtered_df.query("produkte == 1")
 produkt_df['produkte'] = np.where(produkt_df['produkte']== 1, "produkte", 0)
 produkt_group = produkt_df.groupby(['new_place_id', "produkte"], as_index=False)['polarity'].mean()
 pivot_produkt = produkt_group.pivot_table('polarity', index='new_place_id', columns=('produkte'))
-sns.set(rc={'figure.figsize':(11.7,8.27)})
-swarm_plot = sns.heatmap(pivot_produkt, cmap="vlag_r", annot=True, cbar=False, annot_kws = {'fontsize': 10 }, linewidth = 1)
+#sns.set(rc={'figure.figsize':(11.7,8.27)})
+#swarm_plot = sns.heatmap(pivot_produkt, cmap="vlag_r", annot=True, cbar=False, annot_kws = {'fontsize': 10 }, linewidth = 1)
 
 
 design_df = filtered_df.query("innendesign == 1")
@@ -132,13 +132,14 @@ design_df['innendesign'] = np.where(design_df['innendesign']== 1, "design", 0)
 design_group = design_df.groupby(['new_place_id', "innendesign"], as_index=False)['polarity'].mean()
 design_group
 pivot_design = design_group.pivot_table('polarity', index='new_place_id', columns=('innendesign'))
-sns.set(rc={'figure.figsize':(11.7,8.27)})
-swarm_plot = sns.heatmap(pivot_design, cmap="vlag_r", annot=True, cbar=False, annot_kws = {'fontsize': 10 }, linewidth = 1)
+#sns.set(rc={'figure.figsize':(11.7,8.27)})
+#swarm_plot = sns.heatmap(pivot_design, cmap="vlag_r", annot=True, cbar=False, annot_kws = {'fontsize': 10 }, linewidth = 1)
 
 frames = [pivot_preis, pivot_service, pivot_produkt, pivot_design]
 
 result = pd.concat(frames, axis=1)
 fig = sns.set(rc={'figure.figsize':(11.7,8.27)})
+fig = sns.set(rc={'axes.facecolor':'black', 'figure.facecolor':'black'})
 swarm_plot = sns.heatmap(result, cmap="vlag_r", annot=True, cbar=False, annot_kws = {'fontsize': 10 }, linewidth = 1)
 plt.show()
 st.pyplot(fig, use_container_width=True)
