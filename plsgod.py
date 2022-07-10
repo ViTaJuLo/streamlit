@@ -241,7 +241,9 @@ select_year_range2 = reversed(sorted(positive['review_datetime_utc'].unique()))
 yearmax2 = positive['review_datetime_utc'].max()
 yearmin2 = positive['review_datetime_utc'].min()
 select_year_slider2 = st.select_slider('Bitte wählen Sie einen Zeitraum aus.', options=select_year_range2, value=(yearmax2, yearmin2))
-
+startyear2, endyear2 = list(select_year_slider)[0], list(select_year_slider)[1]
+    
+selected_office_year2 = positive[(positive.new_place_id.isin(select_office_dropdown2)) & ((positive.review_datetime_utc <= startyear2) & (positive.review_datetime_utc >= endyear2))]
 
 #tickers2 = positive['new_place_id'].unique()
 #dropdown2 = st.multiselect('Welchen Standort möchten Sie auswählen?', tickers2, default=["Edeka Kohler Kehl  - Am Läger"])
