@@ -299,7 +299,7 @@ selected_office_year = negative[(negative.new_place_id.isin(select_office_dropdo
 #tickers3 = negative['new_place_id'].unique()
 #dropdown3 = st.multiselect('Welchen Standort möchten Sie auswählen?', tickers3, default=["Edeka Kohler Kehl  - Am Läger"])
 
-#neg_df = negative[negative["new_place_id"].isin(dropdown3)]
+neg_df = negative[negative["new_place_id"].isin(select_office_dropdown)]
 from sklearn.feature_extraction.text import CountVectorizer
 
 
