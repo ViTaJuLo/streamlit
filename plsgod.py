@@ -281,8 +281,8 @@ startyear, endyear = list(select_year_slider)[0], list(select_year_slider)[1]
     
 selected_office_year = negative[(negative.new_place_id.isin(select_office_dropdown)) & ((negative.Review_year <= startyear) & (negative.Review_year >= endyear))]
     
-st.map(selected_office_year)
-st.dataframe(selected_office_year.reset_index(drop=True))
+#st.map(selected_office_year)
+#st.dataframe(selected_office_year.reset_index(drop=True))
 
 
 
