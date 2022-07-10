@@ -81,7 +81,7 @@ df = read_df1()
 
 # CREATE DATA FILTERS 
 tickers = df['new_place_id'].unique()
-dropdown = st.multiselect('Welche Standorte möchten Sie vergleichen?', tickers, default=["Edeka Kohler Kehl  - Am Läger"])
+dropdown = st.sidebar.multiselect('Welche Standorte möchten Sie vergleichen?', tickers, default=["Edeka Kohler Kehl  - Am Läger"])
 filtered_df = df[df["new_place_id"].isin(dropdown)]
 #st.slider("Select the datime!",value=(start, end))
 
