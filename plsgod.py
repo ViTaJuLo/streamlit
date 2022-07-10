@@ -293,11 +293,12 @@ select_year_range = reversed(sorted(negative['review_datetime_utc'].unique()))
 yearmax = negative['review_datetime_utc'].max()
 yearmin = negative['review_datetime_utc'].min()
 select_year_slider = st.select_slider('Bitte wählen Sie einen Zeitraum aus.', options=select_year_range, value=(yearmax, yearmin))
-#startyear, endyear = list(select_year_slider)[0], list(select_year_slider)[1]
+startyear, endyear = list(select_year_slider)[0], list(select_year_slider)[1]
     
-#selected_office_year = negative[(negative.new_place_id.isin(select_office_dropdown)) & ((negative.Review_year <= startyear) & (negative.Review_year >= endyear))]
+selected_office_year = negative[(negative.new_place_id.isin(select_office_dropdown)) & ((negative.Review_year <= startyear) & (negative.Review_year >= endyear))]
 
-
+#st.map(selected_office_year)
+#st.dataframe(selected_office_year.reset_index(drop=True))
 
 
 
@@ -305,7 +306,7 @@ select_year_slider = st.select_slider('Bitte wählen Sie einen Zeitraum aus.', o
 #tickers3 = negative['new_place_id'].unique()
 #dropdown3 = st.multiselect('Welchen Standort möchten Sie auswählen?', tickers3, default=["Edeka Kohler Kehl  - Am Läger"])
 
-neg_df = negative[negative["new_place_id"].isin(select_office_dropdown)]
+neg_df = selected_office_year[selected_office_year["new_place_id"].isin(select_office_dropdown)]
 from sklearn.feature_extraction.text import CountVectorizer
 
 
