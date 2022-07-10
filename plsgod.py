@@ -85,9 +85,6 @@ filtered_df = df[df["new_place_id"].isin(dropdown)]
 #st.slider("Select the datime!",value=(start, end))
 
 st.subheader("Key Metriken" )
-body = "Die unten abgebildete Matrix erlaubt es verschiedene Standorte mit Hinblick auf diverse Key Metriken zu vergleichen."
-st.markdown(body, unsafe_allow_html=False)
-
 #start = df["review_datetime_utc"][0]
 #end = df["review_datetime_utc"][len(df)-1]
 
@@ -100,6 +97,9 @@ pivot = group.pivot_table(columns="new_place_id")
 fig = px.imshow(pivot, text_auto=True, aspect="auto", color_continuous_scale='blackbody')
 fig.show()
 st.plotly_chart(fig, use_container_width=True)
+
+body = "Die unten abgebildete Matrix erlaubt es verschiedene Standorte mit Hinblick auf diverse Key Metriken zu vergleichen."
+st.markdown(body, unsafe_allow_html=False)
 
 
 
@@ -127,7 +127,7 @@ st.plotly_chart(fig, use_container_width=True)
 
 st.markdown(f'<h1 style="color:#808080;font-size:24px;">{"_______________________________________________________________________________________________________"}</h1>', unsafe_allow_html=True)
 
-
+st.markdown('##')
 ### CATEGORIES ####
 st.subheader("Wie haben Kunden die Kategorien Preis-Leistungsverhältnis, Produkte, Service & Interior der Geschäfte bewertet?")
 body = "Diese Matrix visualisiert pro Kategorie den durchschnittlichen Sentiment-Score für die ausgewählten Geschäfte und den ausgewählten Zeitraum. Der Score bewegt sich zwischen -1 und 1. -1 symbolisiert eine negative Bewertung, während +1 eine sehr positive Bewertung darstellt."
