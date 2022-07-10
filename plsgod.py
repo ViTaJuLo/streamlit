@@ -77,9 +77,18 @@ def read_df1():
 df = read_df1()
 
 ## FIRST VISUALS
-st.markdown(f'<h1 style="color:#808080;font-size:24px;">{"_______________________________________________________________________________________________________"}</h1>', unsafe_allow_html=True)
-st.subheader("Der Vergleich: Edeka vs. Andere")
-body = "Die unten abgebildete Matrix erlaubt es verschiedene Standorte mit Hinblick auf diverse Key Metriken zu vergleichen"
+
+body = "Bitte wählen Sie einen oder mehrere Standorte und einen Zeitrahmen aus."
+st.markdown(body, unsafe_allow_html=False)
+
+# CREATE DATA FILTERS 
+tickers = df['new_place_id'].unique()
+dropdown = st.multiselect('Welche Standorte möchten Sie vergleichen?', tickers, default=["Edeka Kohler Kehl  - Am Läger"])
+filtered_df = df[df["new_place_id"].isin(dropdown)]
+#st.slider("Select the datime!",value=(start, end))
+
+st.subheader("Key Metriken" )
+body = "Die unten abgebildete Matrix erlaubt es verschiedene Standorte mit Hinblick auf diverse Key Metriken zu vergleichen."
 st.markdown(body, unsafe_allow_html=False)
 
 #start = df["review_datetime_utc"][0]
@@ -107,8 +116,8 @@ st.plotly_chart(fig, use_container_width=True)
 #####  SECOND VISUALS: RATINGS OVER TIME ####
 
 
-st.subheader("Entwicklung der Ratings über Zeit")
-body = "Diese Grafik visualisiert das durchschnittliche Rating per Standort über Zeit"
+st.subheader("Entwicklung der durchschnittlichen Ratings")
+body = "Diese Grafik visualisiert die Entwicklung des durchschnittlichen Sterne-Ratings."
 st.markdown(body, unsafe_allow_html=False)
 group = filtered_df.groupby(['new_place_id', 'Review_year'], as_index=False)['review_rating'].mean()
 fig = px.line(group, x=group['Review_year'], y=group['review_rating'], width=1000, height=400, color=group['new_place_id'], title='Entwicklung des durschnittlichen Ratings pro Jahr pro Standort')
@@ -117,6 +126,14 @@ fig = fig.update_layout(xaxis_showgrid=False, yaxis_showgrid=False)
 st.plotly_chart(fig, use_container_width=True)
 
 
+st.subheader("Entwicklung der durchschnittlichen Sentiment-Ratings")
+body = "Diese Grafik visualisiert die Entwicklung des durchschnittlichen Sentiment-Ratings."
+st.markdown(body, unsafe_allow_html=False)
+group = filtered_df.groupby(['new_place_id', 'Review_year'], as_index=False)['polarity'].mean()
+fig = px.line(group, x=group['Review_year'], y=group['polarity'], width=1000, height=400, color=group['new_place_id'], title='Entwicklung des durschnittlichen Sentiments pro Jahr pro Standort')
+#fig.show()
+fig = fig.update_layout(xaxis_showgrid=False, yaxis_showgrid=False)
+st.plotly_chart(fig, use_container_width=True)
 
 st.markdown(f'<h1 style="color:#808080;font-size:24px;">{"_______________________________________________________________________________________________________"}</h1>', unsafe_allow_html=True)
 
