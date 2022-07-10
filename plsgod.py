@@ -102,6 +102,8 @@ st.plotly_chart(fig, use_container_width=True)
 
 
 ### CATEGORIES ####
+st.subheader("Wie wurden die Kategorien Preis-Leistungsverhältnis, Service, Produkte & Innendesign von Kunden bewertet?")
+body = "Diese Matrix visualisiert pro Kategorie den durchschnittlichen Sentiment-Score für die ausgewählten Geschäfte und den ausgewählten Zeitraumen. Der Score bewegt sich zwischen -1 und 1, wobei -1 sehr negativ ist und +1 sehr positiv."
 st.set_option('deprecation.showPyplotGlobalUse', False)
 preis_df = filtered_df.query("preis == 1")
 preis_df['preis'] = np.where(preis_df['preis']== 1, "preis", 0)
