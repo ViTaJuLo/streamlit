@@ -227,10 +227,19 @@ st.subheader("Positives Feedback per Standort")
 body = "Diese Grafik zeigt das positive Feedback anhand derjenigen Reviews, die ein Sentiment größer oder gleich 0 aufweisen."
 st.markdown(body, unsafe_allow_html=False)
 positive = df.query("polarity >= 0")
-tickers2 = positive['new_place_id'].unique()
-dropdown2 = st.multiselect('Welchen Standort möchten Sie auswählen?', tickers2, default=["Edeka Kohler Kehl  - Am Läger"])
 
-pos_df = positive[positive["new_place_id"].isin(dropdown2)]
+select_office2 = sorted(positive['new_place_id'].unique())
+select_office_dropdown2 = st.multiselect('Welchen Standort möchten Sie auswählen?', select_office2, default=["Edeka Kohler Kehl  - Am Läger"])
+select_year_range2 = reversed(sorted(positive['review_datetime_utc'].unique()))
+yearmax2 = positive['review_datetime_utc'].max()
+yearmin2 = positive['review_datetime_utc'].min()
+select_year_slider2 = st.select_slider('Bitte wählen Sie einen Zeitraum aus.', options=select_year_range2, value=(yearmax2, yearmin2))
+
+
+#tickers2 = positive['new_place_id'].unique()
+#dropdown2 = st.multiselect('Welchen Standort möchten Sie auswählen?', tickers2, default=["Edeka Kohler Kehl  - Am Läger"])
+
+pos_df = positive[positive["new_place_id"].isin(select_office_dropdown2)]
 from sklearn.feature_extraction.text import CountVectorizer
 
 c_vec = CountVectorizer(ngram_range=(2,3)) 
@@ -272,11 +281,11 @@ st.markdown(body2, unsafe_allow_html=False)
 
 negative = df.query("polarity < 0")
 select_office = sorted(negative['new_place_id'].unique())
-select_office_dropdown = st.sidebar.multiselect('Select one or multiple office(s) to display data:', select_office, default=["Edeka Kohler Kehl  - Am Läger"])
+select_office_dropdown = st.multiselect('Welchen Standort möchten Sie auswählen?', select_office, default=["Edeka Kohler Kehl  - Am Läger"])
 select_year_range = reversed(sorted(negative['review_datetime_utc'].unique()))
 yearmax = negative['review_datetime_utc'].max()
 yearmin = negative['review_datetime_utc'].min()
-select_year_slider = st.select_slider('Use slider to display year range:', options=select_year_range, value=(yearmax, yearmin))
+select_year_slider = st.select_slider('Bitte wählen Sie einen Zeitraum aus.', options=select_year_range, value=(yearmax, yearmin))
 #startyear, endyear = list(select_year_slider)[0], list(select_year_slider)[1]
     
 #selected_office_year = negative[(negative.new_place_id.isin(select_office_dropdown)) & ((negative.Review_year <= startyear) & (negative.Review_year >= endyear))]
