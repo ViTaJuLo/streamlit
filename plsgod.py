@@ -102,8 +102,8 @@ st.plotly_chart(fig, use_container_width=True)
 
 
 ### CATEGORIES ####
-st.subheader("Wie wurden die Kategorien Preis-Leistungsverhältnis, Service, Produkte & Innendesign von Kunden bewertet?")
-body = "Diese Matrix visualisiert pro Kategorie den durchschnittlichen Sentiment-Score für die ausgewählten Geschäfte und den ausgewählten Zeitraumen. Der Score bewegt sich zwischen -1 und 1, wobei -1 sehr negativ ist und +1 sehr positiv."
+st.subheader("Wie haben Kunden die Kategorien Preis-Leistungsverhältnis, Produkte, Service & Interior der Geschäfte bewertet?")
+body = "Diese Matrix visualisiert pro Kategorie den durchschnittlichen Sentiment-Score für die ausgewählten Geschäfte und den ausgewählten Zeitraum. Der Score bewegt sich zwischen -1 und 1. -1 symbolisiert eine negative Bewertung, während +1 eine sehr positive Bewertung darstellt."
 st.markdown(body, unsafe_allow_html=False)
 
 st.set_option('deprecation.showPyplotGlobalUse', False)
