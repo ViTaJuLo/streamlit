@@ -76,7 +76,7 @@ def read_df1():
 
 # read in data
 df = read_df1()
-
+st.write(df)
 ## FIRST VISUALS
 
 # CREATE DATA FILTERS 
