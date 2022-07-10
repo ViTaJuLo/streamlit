@@ -90,6 +90,9 @@ yearmax3 = df['review_datetime_utc'].max()
 yearmin3 = df['review_datetime_utc'].min()
 select_year_slider3 = st.select_slider('Bitte wählen Sie einen Zeitraum aus.', options=select_year_range3, value=(yearmax3, yearmin3))
 
+startyear3, endyear3 = list(select_year_slider3)[0], list(select_year_slider3)[1]
+    
+selected_office_year3 = df[(df.new_place_id.isin(select_office_dropdown3)) & ((df.review_datetime_utc <= startyear3) & (df.review_datetime_utc >= endyear3))]
 #select_year_range = sorted(filtered_df["review_datetime_utc"].unique())
 #vmax = df["Review_year"].max()
 #vmin = df["Review_year"].max()
@@ -241,14 +244,15 @@ select_year_range2 = reversed(sorted(positive['review_datetime_utc'].unique()))
 yearmax2 = positive['review_datetime_utc'].max()
 yearmin2 = positive['review_datetime_utc'].min()
 select_year_slider2 = st.select_slider('Bitte wählen Sie einen Zeitraum aus.', options=select_year_range2, value=(yearmax2, yearmin2))
-startyear2, endyear2 = list(select_year_slider)[0], list(select_year_slider)[1]
+startyear2, endyear2 = list(select_year_slider2)[0], list(select_year_slider2)[1]
     
 selected_office_year2 = positive[(positive.new_place_id.isin(select_office_dropdown2)) & ((positive.review_datetime_utc <= startyear2) & (positive.review_datetime_utc >= endyear2))]
 
 #tickers2 = positive['new_place_id'].unique()
 #dropdown2 = st.multiselect('Welchen Standort möchten Sie auswählen?', tickers2, default=["Edeka Kohler Kehl  - Am Läger"])
 
-pos_df = positive[positive["new_place_id"].isin(select_office_dropdown2)]
+#pos_df = positive[positive["new_place_id"].isin(select_office_dropdown2)]
+pos_df = selected_office_year2[selected_office_year2["new_place_id"].isin(select_office_dropdown2)]
 from sklearn.feature_extraction.text import CountVectorizer
 
 c_vec = CountVectorizer(ngram_range=(2,3)) 
