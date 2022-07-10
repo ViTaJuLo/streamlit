@@ -104,16 +104,7 @@ result = pd.concat(frames, axis=1)
 import functools as ft
 df_final = ft.reduce(lambda left, right: pd.merge(left, right, on='new_place_id'), frames)
 df_final = df_final.rename(columns={'review_rating_x': 'avg. rating', 'review_rating_y': 'count reviews', 'polarity': 'avg. sentiment'})
-
-fig = go.Figure(data=[go.Table(
-    header=dict(values=list(df_final.columns),
-                fill_color='purple',
-                align='left'),
-    cells=dict(values=[df_final.columns],
-               fill_color='black',
-               align='left'))
-])
-st.plotly_chart(fig, use_container_width=True)
+st.table(df_final)
 ########
 
 #group = filtered_df.groupby(['new_place_id'], as_index=False).agg({'polarity_reviews': ['mean'], 'review_rating': ['mean','count']})
