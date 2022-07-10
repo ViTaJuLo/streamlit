@@ -88,7 +88,7 @@ filtered_df = df[df["new_place_id"].isin(dropdown)]
 #vmin = filtered_df["review_datetime_utc"].max()
                           
 #select_data = st.sidebar.select_slider("Select the datime!",options=select_year_range, value=(vmax, vmin))
-#select_data = st.sidebar.slider("Select the datime!", value=(filtered_df[(filtered_df['review_datetime_utc'] == '2021-1-1')], filtered_df[(filtered_df['review_datetime_utc'] == '2022-6-1')]))
+select_data = st.sidebar.slider("Select the datime!", value=(df[(df['review_datetime_utc'] == '2021-1-1')], df[(df['review_datetime_utc'] == '2022-6-1')]))
 #df[(df['date'] > '2000-6-1') & (df['date'] <= '2000-6-10')]
 
 from dateutil.relativedelta import relativedelta # to add days or years
