@@ -78,9 +78,6 @@ df = read_df1()
 
 ## FIRST VISUALS
 
-body = "Bitte wählen Sie einen oder mehrere Standorte und einen Zeitrahmen aus."
-st.markdown(body, unsafe_allow_html=False)
-
 # CREATE DATA FILTERS 
 tickers = df['new_place_id'].unique()
 dropdown = st.multiselect('Welche Standorte möchten Sie vergleichen?', tickers, default=["Edeka Kohler Kehl  - Am Läger"])
@@ -97,13 +94,6 @@ st.markdown(body, unsafe_allow_html=False)
 
 
 ########
-
-# CREATE DATA FILTERS 
-tickers = df['new_place_id'].unique()
-dropdown = st.multiselect('Welche Standorte möchten Sie vergleichen?', tickers, default=["Edeka Kohler Kehl  - Am Läger"])
-filtered_df = df[df["new_place_id"].isin(dropdown)]
-#st.slider("Select the datime!",value=(start, end))
-
 
 group = filtered_df.groupby(['new_place_id'], as_index=False).agg({'polarity_reviews': ['mean'], 'review_rating': ['mean','count']})
 pivot = group.pivot_table(columns="new_place_id")
