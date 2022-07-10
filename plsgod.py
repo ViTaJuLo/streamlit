@@ -17,7 +17,8 @@ st.image("https://raw.githubusercontent.com/ViTaJuLo/streamlit/main/edeka.jpeg",
 st.title("Customer Satisfaction Dashboard")
 st.subheader("Wie schneidet Edeka Kohler im Vergleich zu anderen Lebensmittelketten ab?" )
 st.caption ("basierend auf Google Reviews")
-
+st.markdown('##')
+st.markdown('##')
 
 
 
