@@ -80,12 +80,19 @@ df = read_df1()
 
 # CREATE DATA FILTERS 
 tickers = df['new_place_id'].unique()
-dropdown = st.sidebar.multiselect('Welche Standorte möchten Sie vergleichen?', tickers, default=["Edeka Kohler Kehl  - Am Läger"])
+dropdown = st.multiselect('Welche Standorte möchten Sie vergleichen?', tickers, default=["Edeka Kohler Kehl  - Am Läger"])
 filtered_df = df[df["new_place_id"].isin(dropdown)]
 
+#select_office2 = sorted(positive['new_place_id'].unique())
+#select_office_dropdown2 = st.multiselect('Welchen Standort möchten Sie auswählen?', select_office2, default=["Edeka Kohler Kehl  - Am Läger"])
+select_year_range3 = reversed(sorted(df['review_datetime_utc'].unique()))
+yearmax3 = df['review_datetime_utc'].max()
+yearmin3 = df['review_datetime_utc'].min()
+select_year_slider3 = st.select_slider('Bitte wählen Sie einen Zeitraum aus.', options=select_year_range3, value=(yearmax3, yearmin3))
+
 #select_year_range = sorted(filtered_df["review_datetime_utc"].unique())
-vmax = df["Review_year"].max()
-vmin = df["Review_year"].max()
+#vmax = df["Review_year"].max()
+#vmin = df["Review_year"].max()
                           
 #select_data = st.sidebar.slider("Select the datime!", value=(vmax, vmin))
 #select_data = st.sidebar.slider("Select the datime!", value=(df[(df['review_datetime_utc'] == '2021-1-1')], df[(df['review_datetime_utc'] == '2022-6-1')]))
