@@ -138,13 +138,14 @@ pivot_design = design_group.pivot_table('polarity', index='new_place_id', column
 frames = [pivot_preis, pivot_service, pivot_produkt, pivot_design]
 
 result = pd.concat(frames, axis=1)
-fig = sns.set(rc={'figure.figsize':(11.7,8.27)})
-fig = sns.set(rc={'axes.facecolor':'black', 'figure.facecolor':'black'})
-swarm_plot = sns.heatmap(result, cmap="vlag_r", annot=True, cbar=False, annot_kws = {'fontsize': 10 }, linewidth = 1)
-plt.show()
-st.pyplot(fig, use_container_width=True)
-
-
+#fig = sns.set(rc={'figure.figsize':(11.7,8.27)})
+#fig = sns.set(rc={'axes.facecolor':'black', 'figure.facecolor':'black'})
+#swarm_plot = sns.heatmap(result, cmap="vlag_r", annot=True, cbar=False, annot_kws = {'fontsize': 10 }, linewidth = 1)
+#plt.show()
+#st.pyplot(fig, use_container_width=True)
+fig.show()
+fig = px.imshow(result, text_auto=True, aspect="auto", color_continuous_scale='blackbody')
+st.plotly_chart(fig, use_container_width=True)
 
 
 
