@@ -90,19 +90,19 @@ st.subheader("Key Metriken" )
 #start = df["review_datetime_utc"][0]
 #end = df["review_datetime_utc"][len(df)-1]
 avg_rating = filtered_df.groupby(['new_place_id'], as_index=False)['review_rating'].mean()
-p1 = avg_rating.pivot_table('review_rating', index='Name')
+p1 = avg_rating.pivot_table('review_rating', index='new_place_id')
 
 review_count =  filtered_df.groupby(['new_place_id'], as_index=False)['review_rating'].count()
-p2 = review_count.pivot_table('review_rating', index='Name')
+p2 = review_count.pivot_table('review_rating', index='new_place_id')
 
 avg_sentiment = filtered_df.groupby(['new_place_id'], as_index=False)['polarity'].mean()
-p3 = avg_sentiment.pivot_table('polarity', index='Name')
+p3 = avg_sentiment.pivot_table('polarity', index='new_place_id')
 
 frames = [avg_rating, review_count, avg_sentiment]
 result = pd.concat(frames, axis=1)
 
 import functools as ft
-df_final = ft.reduce(lambda left, right: pd.merge(left, right, on='Name'), frames)
+df_final = ft.reduce(lambda left, right: pd.merge(left, right, on='new_place_id'), frames)
 df_final = df_final.rename(columns={'review_rating_x': 'avg. rating', 'review_rating_y': 'count reviews', 'polarity': 'avg. sentiment'})
 
 fig = go.Figure(data=[go.Table(
