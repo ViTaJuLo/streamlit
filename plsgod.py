@@ -103,7 +103,7 @@ result = pd.concat(frames, axis=1)
 
 import functools as ft
 df_final = ft.reduce(lambda left, right: pd.merge(left, right, on='new_place_id'), frames)
-df_final = df_final.rename(columns={'review_rating_x': 'avg. rating', 'review_rating_y': 'count reviews', 'polarity': 'avg. sentiment'})
+df_final = df_final.rename(columns={'new_place_id': 'Standort', 'review_rating_x': 'avg. rating', 'review_rating_y': 'count reviews', 'polarity': 'avg. sentiment'})
 st.table(df_final)
 ########
 
