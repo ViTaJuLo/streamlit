@@ -102,7 +102,7 @@ result = pd.concat(frames, axis=1)
 
 filtered_df['ratio_polarity'] = np.where(filtered_df['polarity'] >= 0, 0, 1) # encoded inverted to compute easier
 p_len = filtered_df.groupby(['new_place_id'], as_index=False)['ratio_polarity'].count()
-p_sum = nlp_df.groupby(['new_place_id'], as_index=False)['ratio_polarity'].sum()
+p_sum = filtered_df.groupby(['new_place_id'], as_index=False)['ratio_polarity'].sum()
 polarity_per = list((p_sum['ratio_polarity'] / p_len['ratio_polarity']) * 100)
 
 import functools as ft
