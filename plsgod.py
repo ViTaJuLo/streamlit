@@ -86,12 +86,14 @@ st.markdown(body, unsafe_allow_html=False)
 #end = df["review_datetime_utc"][len(df)-1]
 
 
+
+########
+
 # CREATE DATA FILTERS 
 tickers = df['new_place_id'].unique()
 dropdown = st.multiselect('Welche Standorte möchten Sie vergleichen?', tickers, default=["Edeka Kohler Kehl  - Am Läger"])
 filtered_df = df[df["new_place_id"].isin(dropdown)]
 #st.slider("Select the datime!",value=(start, end))
-st.write(filtered_df)
 
 
 group = filtered_df.groupby(['new_place_id'], as_index=False).agg({'polarity_reviews': ['mean'], 'review_rating': ['mean','count']})
@@ -99,6 +101,24 @@ pivot = group.pivot_table(columns="new_place_id")
 fig = px.imshow(pivot, text_auto=True, aspect="auto", color_continuous_scale='blackbody')
 fig.show()
 st.plotly_chart(fig, use_container_width=True)
+
+
+
+#####  SECOND VISUALS: RATINGS OVER TIME ####
+
+
+st.subheader("Entwicklung der Ratings über Zeit")
+body = "Diese Grafik visualisiert das durchschnittliche Rating per Standort über Zeit"
+st.markdown(body, unsafe_allow_html=False)
+group = filtered_df.groupby(['new_place_id', 'Review_year'], as_index=False)['review_rating'].mean()
+fig = px.line(group, x=group['Review_year'], y=group['review_rating'], width=1000, height=400, color=group['new_place_id'], title='Entwicklung des durschnittlichen Ratings pro Jahr pro Standort')
+#fig.show()
+fig = fig.update_layout(xaxis_showgrid=False, yaxis_showgrid=False)
+st.plotly_chart(fig, use_container_width=True)
+
+
+
+st.markdown(f'<h1 style="color:#808080;font-size:24px;">{"_______________________________________________________________________________________________________"}</h1>', unsafe_allow_html=True)
 
 
 ### CATEGORIES ####
@@ -151,23 +171,7 @@ fig.update_layout(coloraxis_showscale=False)
 fig.show()
 st.plotly_chart(fig, use_container_width=True)
 
-
-
-
-
-
-
-#####  SECOND VISUALS: RATINGS OVER TIME ####
-
-
-st.subheader("Entwicklung der Ratings über Zeit")
-body = "Diese Grafik visualisiert das durchschnittliche Rating per Standort über Zeit"
-st.markdown(body, unsafe_allow_html=False)
-group = filtered_df.groupby(['new_place_id', 'Review_year'], as_index=False)['review_rating'].mean()
-fig = px.line(group, x=group['Review_year'], y=group['review_rating'], width=1000, height=400, color=group['new_place_id'], title='Entwicklung des durschnittlichen Ratings pro Jahr pro Standort')
-#fig.show()
-fig = fig.update_layout(xaxis_showgrid=False, yaxis_showgrid=False)
-st.plotly_chart(fig, use_container_width=True)
+#####
 
 
 st.markdown(f'<h1 style="color:#808080;font-size:24px;">{"_______________________________________________________________________________________________________"}</h1>', unsafe_allow_html=True)
