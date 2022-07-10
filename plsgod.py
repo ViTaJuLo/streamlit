@@ -277,19 +277,9 @@ select_year_range = reversed(sorted(negative['Review_year'].unique()))
 yearmax = negative['Review_year'].max()
 yearmin = negative['Review_year'].min()
 select_year_slider = st.select_slider('Use slider to display year range:', options=select_year_range, value=(yearmax, yearmin))
-startyear, endyear = list(select_year_slider)[0], list(select_year_slider)[1]
+#startyear, endyear = list(select_year_slider)[0], list(select_year_slider)[1]
     
-selected_office_year = negative[(negative.new_place_id.isin(select_office_dropdown)) & ((negative.Review_year <= startyear) & (negative.Review_year >= endyear))]
-    
-#st.map(selected_office_year)
-st.dataframe(selected_office_year.reset_index(drop=True))
-
-
-
-
-
-
-
+#selected_office_year = negative[(negative.new_place_id.isin(select_office_dropdown)) & ((negative.Review_year <= startyear) & (negative.Review_year >= endyear))]
 
 
 
