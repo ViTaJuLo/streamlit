@@ -84,12 +84,12 @@ dropdown = st.sidebar.multiselect('Welche Standorte möchten Sie vergleichen?', 
 filtered_df = df[df["new_place_id"].isin(dropdown)]
 
 #select_year_range = sorted(filtered_df["review_datetime_utc"].unique())
-vmax = filtered_df["review_datetime_utc"].max()
-vmin = filtered_df["review_datetime_utc"].max()
+#vmax = filtered_df["review_datetime_utc"].max()
+#vmin = filtered_df["review_datetime_utc"].max()
                           
 #select_data = st.sidebar.select_slider("Select the datime!",options=select_year_range, value=(vmax, vmin))
-select_data = st.sidebar.slider("Select the datime!", value=(vmax, vmin))
-
+select_data = st.sidebar.slider("Select the datime!", value=(filtered_df[(filtered_df[‘review_datetime_utc'] == '2021-1-1)], filtered_df[(filtered_df[‘review_datetime_utc'] == '2022-6-1)])))
+#df[(df['date'] > '2000-6-1') & (df['date'] <= '2000-6-10')]
 st.subheader("Key Metriken" )
 #start = df["review_datetime_utc"][0]
 #end = df["review_datetime_utc"][len(df)-1]
