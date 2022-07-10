@@ -18,7 +18,7 @@ st.title("Customer Satisfaction Dashboard")
 st.subheader("Wie schneidet Edeka Kohler im Vergleich zu anderen Lebensmittelketten ab?" )
 st.caption ("basierend auf Google Reviews")
 st.markdown('##')
-st.markdown('##')
+
 
 
 
@@ -132,7 +132,7 @@ st.plotly_chart(fig, use_container_width=True)
 
 st.markdown('##')
 st.subheader("Entwicklung der durchschnittlichen Sentiment-Ratings")
-body = "Diese Grafik visualisiert die Entwicklung des durchschnittlichen Sentiment-Ratings für den ausgewählten Zeitraum."
+body = "Diese Grafik visualisiert die Entwicklung des durchschnittlichen Sentiments für den ausgewählten Zeitraum."
 st.markdown(body, unsafe_allow_html=False)
 group = filtered_df.groupby(['new_place_id', 'Review_year'], as_index=False)['polarity'].mean()
 fig = px.line(group, x=group['Review_year'], y=group['polarity'], width=1000, height=400, color=group['new_place_id'])
