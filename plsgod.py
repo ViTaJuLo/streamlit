@@ -122,20 +122,20 @@ st.table(df_final)
 
 st.markdown('##')
 st.subheader("Entwicklung der durchschnittlichen Ratings")
-body = "Diese Grafik visualisiert die Entwicklung des durchschnittlichen Sterne-Ratings."
+body = "Diese Grafik visualisiert die Entwicklung des durchschnittlichen Sterne-Ratings für den ausgewählten Zeitraum."
 st.markdown(body, unsafe_allow_html=False)
 group = filtered_df.groupby(['new_place_id', 'Review_year'], as_index=False)['review_rating'].mean()
-fig = px.line(group, x=group['Review_year'], y=group['review_rating'], width=1000, height=400, color=group['new_place_id'], title='Entwicklung des durschnittlichen Ratings pro Jahr pro Standort')
+fig = px.line(group, x=group['Review_year'], y=group['review_rating'], width=1000, height=400, color=group['new_place_id'])
 #fig.show()
 fig = fig.update_layout(xaxis_showgrid=False, yaxis_showgrid=False)
 st.plotly_chart(fig, use_container_width=True)
 
 st.markdown('##')
 st.subheader("Entwicklung der durchschnittlichen Sentiment-Ratings")
-body = "Diese Grafik visualisiert die Entwicklung des durchschnittlichen Sentiment-Ratings."
+body = "Diese Grafik visualisiert die Entwicklung des durchschnittlichen Sentiment-Ratings für den ausgewählten Zeitraum."
 st.markdown(body, unsafe_allow_html=False)
 group = filtered_df.groupby(['new_place_id', 'Review_year'], as_index=False)['polarity'].mean()
-fig = px.line(group, x=group['Review_year'], y=group['polarity'], width=1000, height=400, color=group['new_place_id'], title='Entwicklung des durschnittlichen Sentiments pro Jahr pro Standort')
+fig = px.line(group, x=group['Review_year'], y=group['polarity'], width=1000, height=400, color=group['new_place_id'])
 #fig.show()
 fig = fig.update_layout(xaxis_showgrid=False, yaxis_showgrid=False)
 st.plotly_chart(fig, use_container_width=True)
@@ -144,7 +144,7 @@ st.markdown(f'<h1 style="color:#808080;font-size:24px;">{"______________________
 
 st.markdown('##')
 ### CATEGORIES ####
-st.subheader("Wie haben Kunden die Kategorien Preis-Leistungsverhältnis, Produkte, Service & Interior der Geschäfte bewertet?")
+st.subheader("Wie haben Kunden die Kategorien  Preis-Leistungsverhältnis, Produkte, Service & Interior  der Geschäfte bewertet?")
 body = "Diese Matrix visualisiert pro Kategorie den durchschnittlichen Sentiment-Score für die ausgewählten Geschäfte und den ausgewählten Zeitraum. Der Score bewegt sich zwischen -1 und 1. -1 symbolisiert eine negative Bewertung, während +1 eine sehr positive Bewertung darstellt."
 st.markdown(body, unsafe_allow_html=False)
 
